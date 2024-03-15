@@ -13,12 +13,13 @@ const authorSchema = Schema(
     bio: {
       type: String,
       trim: true,
-      // minLength: [3, "Biography needs at least 3 chars"],
+      minLength: [3, "Biography needs at least 3 chars"],
       maxLength: [1000, "Biography is max 1000 chars"],
     },
     century: {
       type: Number, 
-      max: [21, "cannot be later than 21st century"] 
+      min: [1, "Centrury must be greater or equal to 1"],
+      max: [21, "Century cannot be later than 21st century"],
     },
     genres: [{
       type: String,
