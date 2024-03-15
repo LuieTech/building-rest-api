@@ -8,7 +8,7 @@ require("./configs/db.config")
 const app = express()
 
 app.use(express.json())
-app.use(logger('combined'))
+app.use(logger('dev'))
 
 const api = require('./configs/routes.config')
 app.use('/v1', api)
