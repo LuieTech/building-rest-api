@@ -24,11 +24,12 @@ const authorSchema = Schema(
     genres: [{
       type: String,
       enum: ['Fantasy', 'Science Fiction', 'Poetry', 'Historical', 'Biography', 'Other']
-    }]
+    }],
   },
   {
     timestamps: true,
     toJSON: {
+      virtuals: true,
       transform: function (doc, ret){
         ret.id = ret._id;
         delete ret._id;
@@ -39,6 +40,19 @@ const authorSchema = Schema(
     }
   }
 )
+
+authorSchema.virtual('books', {
+  ref: 'Book',
+  foreignField: 'author',
+  localField: '_id',
+})
+
+authorSchema.virtual('amountOfBooks', {
+  ref: 'Book',
+  foreignField: 'author',
+  localField: '_id',
+  count: true
+})
 
 const Author = mongoose.model("Author", authorSchema)
 
