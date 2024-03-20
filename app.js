@@ -11,8 +11,8 @@ app.use(express.json())
 app.use(logger('dev'))
 
 const api = require('./configs/routes.config');
-const { default: mongoose } = require("mongoose");
-const { create } = require("./controllers/author.controller");
+const mongoose = require("mongoose");
+// const { create } = require("./controllers/author.controller");
 app.use('/v1', api)
 
 app.use((req, res, next) => next(createError(404, "Route not found")));
