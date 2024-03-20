@@ -11,10 +11,11 @@ module.exports.create = (req, res, next) => {
 
 module.exports.list = (req, res, next) => {
 
-  const criteria = Object.keys(req.query).reduce((newQueryObject, key) => {
-    newQueryObject[key] = req.query[key];
-    return newQueryObject;
-  }, {})
+  const criteria = Object.keys(req.query)
+                    .reduce((newQueryObject, key) => {
+                      newQueryObject[key] = req.query[key];
+                      return newQueryObject;
+                    }, {})
 
   Author.find(criteria)
     .then(authors => res.status(200).json(authors))
@@ -25,6 +26,8 @@ module.exports.list = (req, res, next) => {
 module.exports.detail = (req, res, next) => {
 
   Author.findById(req.params.id)
+    .populate("books")
+    .populate("amountOfBooks")
     .then(author => {
       if(!author) next(createError(404, "Author not found"))
       else res.status(200).json(author)
