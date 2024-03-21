@@ -35,3 +35,18 @@ module.exports.delete = (req, res, next) => {
     .catch(error => next(error))
 
 }
+
+module.exports.detail = (req, res, next) => {
+
+  Book.findById(req.params.id)
+    .then((book) => {
+      if(!book){
+        next(createError(404, "Book not found"))
+      }
+      else {
+        res.status(200).json(book)
+      }
+    })
+    .catch(error => next(error))
+
+}
