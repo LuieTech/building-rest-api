@@ -12,6 +12,10 @@ router.delete("/authors/:id", author.delete)
 //Book routes
 
 router.post("/author/:authorId/books", book.create)
+
 router.delete("/books/:id", book.delete)
+
+router.get("/books/:id", book.detail)
+
 
 module.exports = router
